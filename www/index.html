@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+
+	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<ons-navigator id="myNavigator" page="login.html"></ons-navigator>
+
+		<template id="login.html">
+		  <ons-page id="login">
+		    <ons-toolbar>
+		      <div class="center" style="color: black">LOGIN PAGE</div>
+		      <!--<div class="right">
+		        <ons-if platform="android">
+		          <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
+		          <ons-toolbar-button><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-toolbar-button>
+		        </ons-if>
+		      </div>-->
+		    </ons-toolbar>
+
+		    <div style="margin: 20px auto 5px; text-align: center;">Who's reading?</div>
+
+		    <div style="text-align: center; margin-top: 20px;">
+		      <p>
+		        <ons-input id="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
+		      </p>
+		      <p>
+		        <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+		      </p>
+		      <p style="margin-top: 30px;">
+		        <ons-button onclick="openAdditionalInfo()">Login</ons-button>
+		      </p>
+		    </div>
+		    
+		    <div style="text-align: center; margin-top: 10px;">
+		      <ons-button id="sign-in-button" class="user_cover" onClick="go2Register()">
+		        <div class="user_thumbnail"><ons-icon icon="fa-plus-circle"></ons-icon></div>
+		        <div class="username" id="signin">Sign In</div>
+		      </ons-button>
+		    </div>
+		    
+		    <style type="text/css">
+		      .user_cover {
+		        padding: 0px 20px;
+		        margin: 0px 0px;
+		      }
+
+		      .username {
+		        text-align: center;
+		        color: white;
+		        width: 100%;
+		        font-size: 12px;
+		        margin-top: 5px;
+		      }
+
+		      .user_thumbnail {
+		        width: 50px;
+		        height: 50px;
+		        display: table;
+		        text-align: center;
+		        margin: auto;
+		      }
+
+		      .user_thumbnail ons-icon {
+		        font-size: 30px;
+		        display: table-cell;
+		        color: white;
+		        vertical-align: middle;
+		      }
+		    </style>
+		  </ons-page>
+		</template>
+
+		<template id="signin.html">
+		  <ons-page id="signin">
+		    <ons-toolbar>
+		      <div class="left">
+		        <ons-toolbar-button onClick='noMenuReturn()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button>
+		      </div>
+		      <div class="center">Sign In</div>
+		    </ons-toolbar>
+		    
+		    <div style="margin-left: 8px; margin-top: 10px; margin-right: 8px; margin-bottom: 10px;">
+		      <div style="text-align: center; margin-top: 20px;">
+		        <p>
+		          <ons-input id="email" modifier="underbar" type="email" placeholder="Email" string></ons-input>
+		        </p>
+		        <p>
+		          <ons-input id="repeated-email" modifier="underbar" type="email" placeholder="Repeat Your Email" string></ons-input>
+		        </p>
+		        <p>
+		          <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+		        </p>
+            <p>
+		          <ons-input id="repeat-password" modifier="underbar" type="password" placeholder="Repeat Your Password" float></ons-input>
+		        </p>
+		        
+		        <p style="margin-top: 10px;">
+		          <ons-button onclick="register()">Register</ons-button>
+		        </p>
+		      </div>
+		    </div>
+		  </ons-page>
+		</template>
+
+		<template id="home_splitter.html">
+		  <ons-page id="home_spliter">
+		    <ons-splitter>
+		      <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+		        <ons-page id="menu_page">
+		          <ons-toolbar>
+		            <div class="center">Menu</div>
+		          </ons-toolbar>
+		          
+		          <div id="sidemenu-toolbar-md">
+		            <div class="header-part">
+		              <ons-button modifier="quiet">
+		                <img style="height: 40px; width: 40px" class="profile-thumbnail" src="http://placekitten.com/g/70/70">
+		              </ons-button>
+		            </div>
+		            <div class="header-part">User Name</div>
+		            <div class="header-part subheader" style="margin-top: 2px">User Email</div>
+		          </div>
+		          
+		          <ons-list>
+		            <ons-list-header></ons-list-header>
+		            <ons-list-item onclick="fn.load('home.html')" tappable>
+		              Home
+		            </ons-list-item>
+		            <ons-list-header>Options</ons-list-header>
+		            <ons-list-item onclick="fn.load('settings.html')" tappable>
+		              Share
+		            </ons-list-item>
+		            <ons-list-item onclick="fn.load('about.html')" tappable>
+		              Policy
+		            </ons-list-item>
+		            <ons-list-item onclick="finishLogout()" tappable>
+		              Logout
+		            </ons-list-item>
+		          </ons-list>
+		          
+		          <style type="text/css">
+		            #sidemenu-toolbar {
+		              background-color: white;
+		              display: block;
+		              height: 130px;
+		              padding: 0px 15px;
+		            }
+		      
+		            #sidemenu-toolbar-md {
+		              background-color: white;
+		              display: block;
+		              height: 110px;
+		              padding: 0px 15px;
+		            }
+		      
+		            #sidemenu-page .page__content:not(.page--material__content) {
+		              top: 130px;
+		            }
+		      
+		            #sidemenu-page .page__content.page--material__content {
+		              top: 111px;
+		            }
+		      
+		            #sidemenu-page .page__background {
+		              display: none;
+		            }
+		      
+		            .header-part {
+		              width: 100%;
+		            }
+		      
+		            .header-part ons-button:first-child {
+		              padding: 4px 0 0 4px;
+		            }
+		      
+		            #sidemenu-toolbar .header-part ons-button:last-child {
+		              float: right;
+		              margin-right: 5px;
+		            }
+		      
+		            .header-part.subheader {
+		              font-size: 12px;
+		            }
+		      
+		            #middle-menu {
+		              background-image: none;
+		            }
+		      
+		            #bottom-toolbar ons-button {
+		              margin: auto 15px;
+		            }
+		          </style>
+		        </ons-page>
+		      </ons-splitter-side>
+		      <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+		    </ons-splitter>
+		  </ons-page>
+		</template>
+
+    <template id="additional-information.html">
+      <ons-page id="additional-information">
+        <ons-toolbar>
+          <div class="left">
+		        <ons-toolbar-button onClick='noMenuReturn()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button>
+          </div>
+          <div class="center">
+            Additional Information
+          </div>
+          <div class="right">
+            <ons-button id="next-info-button">
+              next
+            </ons-button>
+          </div>
+        </ons-toolbar>
+
+        <div style="text-align: center">
+          <h2 id="info-state">Stage 01</h2>
+        </div>
+
+        <div style="margin-left: 8px; margin-top: 10px; margin-right: 8px; margin-bottom: 10px;">
+          <div style="text-align: center; margin-top: 20px;" id="info-setter">
+            <p>
+              <ons-input id="fullname" type="name" placeholder="Full Name"></ons-input>
+            </p>
+
+            <p>
+              <ons-input id="nickname" type="name" placeholder="Nickname"></ons-input>
+            </p>
+
+            <p>
+              <label for="choose-sex">Gender</label>
+              <ons-select id="choose-sex" onchange="editSelects(event)">
+                <option value="F">Female</option>
+                <option value="M">Male</option>
+              </ons-select>
+            </p>
+            
+            <p>
+              <label for="birth-date">Birth Date</label>
+              <ons-input id="birth-date" type="date"></ons-input>
+            </p>
+          </div>
+        </div>
+      </ons-page>
+    </template>
+
+		<template id="home.html">
+		  <ons-page>
+		    <ons-toolbar>
+		      <div class="left">
+		        <ons-toolbar-button onclick="fn.open()">
+		          <ons-icon icon="md-menu"></ons-icon>
+		        </ons-toolbar-button>
+		      </div>
+		      <div id='main_page_title' class="center">Home</div>
+		    </ons-toolbar>
+		  
+		    <ons-tabbar position="auto">
+		      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" active>
+		      </ons-tab>
+		      <ons-tab page="tab3.html" label="Favorites" icon="md-star" active-icon="md-star-border">
+		      </ons-tab>
+          <ons-tab page="notifications_tab.html" label="Notifications" icon="md-notifications" active-icon="md-notifications-none" badge="7">
+          </ons-tab>
+		      <ons-tab page="tab2.html" label="Settings" icon="md-settings" active-icon="md-face">
+		      </ons-tab>
+		    </ons-tabbar>
+		  </ons-page>
+		</template>
+
+		<template id="tab1.html">
+		  <ons-page id="Tab1">
+		    <p style="text-align: center;">
+		      Welcome to 4U Short Stories!
+		    </p>
+		    <!--<ons-carousel class="carousel" swipeable='force' auto-scroll id="carousel">
+		      <ons-carousel-item>
+		        <img src="assets/img/onsenui-roadmap.jpg" />
+		      </ons-carousel-item>
+		      <ons-carousel-item>
+		        <img src="assets/img/Monaca_Logo.jpg" />
+		      </ons-carousel-item>
+		      <ons-carousel-item>
+		        <img src="assets/img/Onsen_UI_Logo.jpg" />
+		      </ons-carousel-item>
+		    </ons-carousel>
+		    <div class="cover-label center">
+		      <ul>
+		        <li><div id="dot0" class="circle circle_current">&#x25cf;</div></li>
+		        <li><div id="dot1" class="circle">&#x25cf;</div></li>
+		        <li><div id="dot2" class="circle">&#x25cf;</div></li>
+		      </ul>
+		    </div>
+		    -->
+		    <ons-list style="margin-top: 20px">
+		      <ons-list-header>Stories</ons-list-header>
+		      
+		      <ons-list-item id="on_fire_stories" modifier="chevron" tappable>
+		        <div class="left">
+		          <ons-icon icon="md-fire" class="list-item__icon"></ons-icon>
+		        </div>
+		        <div class="center">
+		          On Fire Stories
+		        </div>
+		      </ons-list-item>
+		      
+		      <ons-list-item id="all_stories" modifier="chevron" tappable>
+		        <div class="left">
+		          <ons-icon icon="md-book" class="list-item__icon"></ons-icon>
+		        </div>
+		        <div class="center">
+		          All Stories
+		        </div>
+		      </ons-list-item>
+		    </ons-list>
+
+		    <style type="text/css">
+		      .carousel ons-carousel-item img {
+		        width: 100%;
+		        max-height: 190px
+		      }
+
+		      .cover-label {
+		        text-align: center;
+		        cursor: default;
+		      }
+
+		      ul {
+		        list-style: none;
+		        padding: 0;
+		      }
+
+		      ul li {
+		        display: inline;
+		        margin-right: 5px;
+		      }
+
+		      .circle {
+		        font-size: 15px;
+		        display: table-cell;
+		        color: #999;
+		      + }
+
+		      .circle_current {
+		        color: white;
+		      }
+
+		      .movie_list {
+		        margin: 10px;
+		        height: 130px;
+		        padding-top: 30px;
+		      }
+
+		      .movie_list img {
+		        width: 90%
+		      }
+		    </style>
+		  </ons-page>
+		</template>
+
+		<template id="tab2.html">
+		  <ons-page id="Tab2">
+		    <p style="text-align: center;">
+		      This is the Settings page.
+		    </p>
+		  </ons-page>
+		</template>
+
+		<template id="tab3.html">
+		  <ons-page id="Tab3">
+		    <p style="text-align: center;">
+		      Here the Favorites will be shown.
+		    </p>
+		  </ons-page>
+		</template>
+
+    
+		<template id="notifications_tab.html">
+		  <ons-page id="Notifications Tab">
+		    <p style="text-align: center;">
+		      Notifications
+		    </p>
+		  </ons-page>
+		</template>
+
+		<template id="stories.html">
+		  <ons-page id="Stories">
+		    <ons-toolbar>
+		      <div class="left"><ons-toolbar-button onClick='goBack()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button></div>
+		      <div class="center"></div>
+          <div class="right"><ons-toolbar-button id="searchButton"><ons-icon icon="search"></div>
+		    </ons-toolbar>
+		    
+		    <ons-pull-hook id="pull-hook">
+		      Pull to refresh
+		    </ons-pull-hook>
+
+        <div id="search-field">
+          
+        </div>
+		    
+		    <ons-list>
+		      <!--<ons-list-header>Recommended</ons-list-header>-->
+		      <ons-lazy-repeat id="infinite-list"></ons-lazy-repeat>
+		    </ons-list>
+		  </ons-page>
+		</template>
+
+		<template id="story_details.html">
+		  <ons-page id="story_details">
+		    <ons-toolbar class="trailer_toolbar" modifier="transparent" inline>
+		      <div class="left">
+		        <ons-if platform="android"><ons-toolbar-button onClick='goBack()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button></ons-if>
+		      </div>
+		      <div class="right">
+		        <ons-if platform="android">
+		          <ons-toolbar-button><ons-icon icon="md-cast"></ons-icon></ons-toolbar-button>
+		          <ons-toolbar-button><ons-icon icon="md-share"></ons-icon></ons-toolbar-button>
+		          <ons-toolbar-button><ons-icon icon="fa-search"></ons-icon></ons-toolbar-button>
+		        </ons-if>
+		        <ons-if platform="ios">
+		          <ons-toolbar-button onclick="goBack()"><ons-icon style="opacity: 0.7; color: black" icon="ion-ios-close"></ons-icon></ons-toolbar-button>
+		        </ons-if>
+		      </div>
+		    </ons-toolbar>
+
+		    <div class="trailer">
+		      <!--<ons-icon icon="fa-play-circle"></ons-icon>-->
+		      <img src="img/Logo_TheSex_cmyk.jpg">
+		    </div>
+
+		    <div class="story_info">
+		      <h2 id="story_title"></h2>
+		      <ons-row class="story_general_info">
+		        <ons-col class="stars">
+		          <ons-icon style="color: red" icon="fa-star"></ons-icon>
+		          <ons-icon style="color: red" icon="fa-star"></ons-icon>
+		          <ons-icon style="color: red" icon="fa-star"></ons-icon>
+		          <ons-icon style="color: red" icon="fa-star"></ons-icon>
+		          <ons-icon style="color: gray" icon="fa-star"></ons-icon>
+		        </ons-col>
+		        <ons-col>2018</ons-col>
+		        <ons-col>2m</ons-col>
+		      </ons-row>
+		      <div class="story_synopsis">A women with life pleasures to know..</div>
+		      <div class="story_cast">
+		        Writer: Writer 1
+		      </div>
+		      <ons-row class="access_content_buttons">
+		        <ons-col>
+		          <ons-button>
+		            <ons-icon icon="ion-play"></ons-icon>
+		            <div>Listen To Story</div>
+		          </ons-button>
+		        </ons-col>
+		        <ons-col>
+		          <ons-button onClick='goToStory()'>
+		            <ons-icon icon="fa-book"></ons-icon>
+		            <div>Read Story</div>
+		          </ons-button>
+		        </ons-col>
+		      </ons-row>
+		      <ons-row class="stories_extra_buttons">
+		        <ons-col>
+		          <ons-button modifier="quiet">
+		            <ons-icon icon="ion-plus-round"></ons-icon>
+		            <div>My Favorites List</div>
+		          </ons-button>
+		        </ons-col>
+		        <ons-col>
+		          <ons-if platform="ios">
+		            <ons-button modifier="quiet">
+		              <ons-icon icon="ion-ios-upload-outline"></ons-icon>
+		              <div>Share</div>
+		            </ons-button>
+		          </ons-if>
+		        </ons-col>
+		      </ons-row>
+		    </div>
+
+		    <div class="stories_list">
+		      <ons-list>
+		        <ons-list-header>Similar Stories</ons-list-header>
+		        <ons-list-item tappable onclick="openStoryDetails('Story 0')">
+		          <div class="left"><img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"></div>
+		          <div class="center"> 
+		            <span class="list-item__title">Story 0</span>
+		            <span class="list-item__subtitle">On the Internet</span>
+		          </div>
+		        </ons-list-item>
+		        <ons-list-item tappable onclick="openStoryDetails('Story 1')">
+		          <div class="left"><img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"></div>
+		          <div class="center"> 
+		            <span class="list-item__title">Story 1</span>
+		            <span class="list-item__subtitle">On the Internet</span>
+		          </div>
+		        </ons-list-item>
+		      </ons-list>
+		    </div>
+
+		    <style type="text/css">
+		      .trailer {
+		        height: 190px;
+		        position: relative;
+		      }
+
+		      .trailer img {
+		        width: 100%;
+		        height: 100%
+		      }
+
+		      .trailer ons-icon {
+		        position: absolute;
+		        top: 50%;
+		        left: 50%;
+		        font-size: 50px;
+		        margin-top: -25px;
+		        margin-left: -25px;
+		        color: #666;
+		        background: white;
+		        width: 50px;
+		        text-align: center;
+		        border-radius: 50%;
+		        opacity: 0.7;
+		      }
+
+		      .trailer ons-icon:active {
+		        opacity: 1;
+		      }
+
+		      .trailer_toolbar {
+		        position: absolute;
+		      }
+		      
+		      .story_info {
+		        padding: 0px 10px;
+		        font-size: 14px;
+		      }
+
+		      .story_general_info {
+		        width: 250px;
+		        margin-bottom: 15px;
+		        color: gray;
+		      }
+
+		      .story_synopsis {
+		        text-align: justify;
+		        margin-bottom: 10px;
+		      }
+
+		      .stars {
+		        white-space: nowrap;
+		        margin-right: 15px
+		      }
+
+		      .story_extra_buttons {
+		        margin-top: 20px;
+		        width: 50%;
+		      }
+
+		      .story_extra_buttons ons-icon {
+		        font-size: 25px;
+		      }
+
+		      .story_extra_buttons ons-button {
+		        text-align: center;
+		        color: white;
+		        font-size: 14px;
+		      }
+
+		      .story_extra_buttons ons-button:active {
+		        color: #FF9D88;
+		      }
+		    </style>
+		  </ons-page>
+		</template>
+
+		<template id="story_reader.html">
+		  <ons-page id="story_reader">
+		    <ons-toolbar>
+		      <div class="left">
+		        <ons-toolbar-button onClick='goBack()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button>
+		      </div>
+		      <div class="center" style="color: black" id='story_title'>Title</div>
+		    </ons-toolbar>
+		    
+		    <ons-carousel fullscreen swipeable auto-scroll id="carousel">
+		      <ons-lazy-repeat id="carousel_story_reader"></ons-lazy-repeat>
+		    </ons-carousel>
+		    
+		    
+		  </ons-page>
+		</template>
+
+		<style type="text/css">
+		  .page {
+		    color: black;
+		    backgroud-color: #FFC3B6;
+		  }
+
+		  .toolbar:not(.toolbar--transparent) {
+		    background-color: #FF9D88;
+		  }
+
+		  .toolbar-button {
+		    color: black;
+		  }
+
+		  .list-item {
+		    color: black;
+		  }
+		  
+		  .toolbar-button--quiet {
+		    color: black;
+		  }
+		</style>
+
+		<script>
+			window.fn = {};
+
+			window.fn.open = function() {
+			  var menu = document.getElementById('menu');
+			  menu.open();
+			};
+
+			window.fn.load = function(page) {
+			  var content = document.getElementById('content');
+			  var menu = document.getElementById('menu');
+			  content.load(page)
+			    .then(menu.close.bind(menu));
+			};
+
+			document.addEventListener('prechange', function(event) {
+			  var mPTitle = document.getElementById('main_page_title');
+			  // In case that we are at the Main Page
+			  if (mPTitle !== null)
+			    mPTitle.innerHTML = event.tabItem.getAttribute('label');
+			});
+
+			document.addEventListener('init', function(event) {
+			  var page = event.target;
+
+			  if (page.id === 'Tab1') {
+			    /*page.querySelector('#carousel').addEventListener("postchange", function() {
+			      page.querySelector('#dot0').classList.remove("circle_current");
+			      page.querySelector('#dot1').classList.remove("circle_current");
+			      page.querySelector('#dot2').classList.remove("circle_current");
+
+			      page.querySelector('#dot' + page.querySelector('#carousel').getActiveIndex()).classList.add("circle_current");
+
+			    });*/
+			    
+			    page.querySelector('#on_fire_stories').onclick = function() {
+			      document.querySelector('#myNavigator').pushPage('stories.html', {data: {title: 'On Fire Stories'}});
+			    };
+			    
+			    page.querySelector('#all_stories').onclick = function() {
+			      document.querySelector('#myNavigator').pushPage('stories.html', {data: {title: 'All Stories'}});
+			    };
+			  } else if (page.id === 'Stories') {
+			    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+			    
+			    var pullHook = document.getElementById('pull-hook');
+
+          page.querySelector('#searchButton').onclick = function () {
+            if (document.querySelector('#search-field').innerHTML === "") {
+              document.querySelector('#search-field').innerHTML = "<p style=\"text-align: center;\">" +
+                "<ons-search-input " +
+                  "placeholder=\"Search\" " +
+                  "onchange=\"ons.notification.toast('Searched for ' + this.value, { timeout: 1000, animation: 'ascend' })\"" +
+                  "></ons-search-input>" +
+                  "</p>";
+            } else {
+              document.querySelector('#search-field').innerHTML = "";
+            }
+          };
+
+			    pullHook.addEventListener('changestate', function(event) {
+			      var message = '';
+			  
+			      switch (event.state) {
+			        case 'initial':
+			          message = 'Pull to refresh';
+			          break;
+			        case 'preaction':
+			          message = 'Release';
+			          break;
+			        case 'action':
+			          message = 'Loading...';
+			          break;
+			      }
+			  
+			      pullHook.innerHTML = message;
+			    });
+			  
+			    pullHook.onAction = function(done) {
+			      setTimeout(done, 1000);
+			    };
+			    
+			    var infiniteList = document.getElementById('infinite-list');
+			  
+			    infiniteList.delegate = {
+			      createItemContent: function(i) {
+			        return ons.createElement('<ons-list-item id="Story ' + i + '" tappable onclick="openStoryDetails(this.id)"><div class="left"><img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"></div>' +
+			                                 '<div class="center">' + 
+			                                 '<span class="list-item__title">Story ' + i + '</span><span class="list-item__subtitle">On the Internet</span></div></ons-list-item>');
+			      },
+			      countItems: function() {
+			        return 120;
+			      }
+			    };
+			  
+			    infiniteList.refresh();
+			  } else if (page.id === 'story_details') {
+			    page.querySelector('#story_title').innerHTML = page.data.title;
+			  } else if (page.id === 'story_reader') {
+			    page.querySelector('#story_title').innerHTML = page.data.title;
+			    var carouselStoryReader = document.getElementById('carousel_story_reader');
+			    var numP = 10;
+			    
+			    for (var p = 1; p <= numP; p++) {
+			      carouselStoryReader.innerHTML += '<ons-carousel-item>' +
+			                                          '<div style="text-align: center; font-size: 30px; margin-top: 8px; margin-left: 8px; margin-right: 8px; margin-bottom: 8px;">' +
+			                                            'Page ' + p +
+			                                          '</div>' +
+			                                        '</ons-carousel-item>';
+			    }
+			  } else if (page.id === 'additional-information') {
+          page.querySelector('#next-info-button').onclick = function () {
+            if (document.querySelector('#info-state').innerHTML === 'Stage 01') {
+              document.querySelector('#info-state').innerHTML = "Stage 02";
+            } else if (document.querySelector('#info-state').innerHTML === 'Stage 02') {
+              openHome();
+            }
+          };
+        }
+			});
+
+			function openStoryDetails(id) {
+			  document.querySelector('#myNavigator').pushPage('story_details.html', {data: {title: id}});
+			}
+
+      function finishLogout () {
+        document.querySelector('#myNavigator').resetToPage('login.html');
+      }
+
+			function openHome() {
+			  document.querySelector('#myNavigator').pushPage('home_splitter.html');
+			}
+
+      function openAdditionalInfo () {
+        document.querySelector('#myNavigator').pushPage('additional-information.html');
+      }
+
+			function goBack() {
+			  document.querySelector('#menu').close().then(function() {
+			    document.querySelector('#myNavigator').popPage()
+			  });
+			}
+
+			function noMenuReturn() {
+			  document.querySelector('#myNavigator').popPage();
+			}
+
+			function go2Register() {
+			  document.querySelector('#myNavigator').pushPage('signin.html');
+			}
+
+			function register() {
+			  noMenuReturn();
+			}
+
+      function openSearchBar () {
+        document.querySelector('#')
+      }
+
+			function goToStory() {
+			  var story_title = document.getElementById('story_title').innerHTML;
+			  document.querySelector('#myNavigator').pushPage('story_reader.html', {data: {title: story_title}});
+			}
+		</script>
+	</body>
+
+</html>
