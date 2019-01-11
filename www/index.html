@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="css/cadastro.css" >
 	<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 
 	<head>
@@ -13,12 +14,226 @@
 	</head>
 
 	<body>
-		<ons-navigator id="myNavigator" page="login.html"></ons-navigator>
+		<ons-navigator id="myNavigator" page="splash.html"></ons-navigator>
+
+    <template id="splash.html">
+      <ons-page id="splash">
+        <!--<div style="width: 80%; left: 10%; margin-top: 25%">-->
+        <div class="splash-icon">
+          <img src="img/Logo_TheSex_cmyk.jpg">
+        </div>
+        <!--<div>-->
+        <div style="margin: 20px auto; width: 320px;" id="progress-bar-splash">
+          <!--<ons-progress-bar value="20" secondary-value="50"></ons-progress-bar>-->
+          <!--<ons-progress-bar indeterminate></ons-progress-bar>-->
+        </div>
+
+        <style type="text/css">
+		      .splash-icon {
+            margin-top: 40%;
+		        height: 190px;
+		        position: relative;
+		      }
+
+		      .splash-icon img {
+		        width: 100%;
+		        height: 100%
+		      }
+
+        </style>
+      </ons-page>
+    </template>
+
+    <template id="initial-page.html">
+      <ons-page id="initial-page">
+          <ons-splitter>
+		      <ons-splitter-side id="init-menu" side="left" width="220px" collapse swipeable>
+		        <ons-page id="menu_page">
+		          <ons-toolbar>
+		            <div class="center">Menu</div>
+		          </ons-toolbar>
+		          
+		          <ons-list>
+		            <ons-list-header>Options</ons-list-header>
+		            <ons-list-item onclick="fn.initialLoad('settings.html')" tappable>
+		              Share
+		            </ons-list-item>
+		            <ons-list-item onclick="fn.initialLoad('about.html')" tappable>
+		              Policy
+		            </ons-list-item>
+                <ons-list-item onclick="finishLogout();" tappable>
+                  Logout
+                </ons-list-item>
+		          </ons-list>
+		          
+		          <style type="text/css">
+		            #sidemenu-toolbar {
+		              background-color: white;
+		              display: block;
+		              height: 130px;
+		              padding: 0px 15px;
+		            }
+		      
+		            #sidemenu-toolbar-md {
+		              background-color: white;
+		              display: block;
+		              height: 110px;
+		              padding: 0px 15px;
+		            }
+		      
+		            #sidemenu-page .page__content:not(.page--material__content) {
+		              top: 130px;
+		            }
+		      
+		            #sidemenu-page .page__content.page--material__content {
+		              top: 111px;
+		            }
+		      
+		            #sidemenu-page .page__background {
+		              display: none;
+		            }
+		      
+		            .header-part {
+		              width: 100%;
+		            }
+		      
+		            .header-part ons-button:first-child {
+		              padding: 4px 0 0 4px;
+		            }
+		      
+		            #sidemenu-toolbar .header-part ons-button:last-child {
+		              float: right;
+		              margin-right: 5px;
+		            }
+		      
+		            .header-part.subheader {
+		              font-size: 12px;
+		            }
+		      
+		            #middle-menu {
+		              background-image: none;
+		            }
+		      
+		            #bottom-toolbar ons-button {
+		              margin: auto 15px;
+		            }
+		          </style>
+		        </ons-page>
+		      </ons-splitter-side>
+		      <ons-splitter-content id="init-content" page="initial-home.html"></ons-splitter-content>
+		    </ons-splitter>
+      </ons-page>
+    </template>
+
+    <template id="initial-home.html">
+		  <ons-page id="initial-home">
+		    <ons-toolbar>
+		      <div class="left">
+		        <ons-toolbar-button onclick="fn.initMenuOpen()">
+		          <ons-icon icon="md-menu"></ons-icon>
+		        </ons-toolbar-button>
+		      </div>
+		      <div id='init_page_title' class="center">Home</div>
+          <div class="right">
+            <ons-toolbar-button onclick="openAdditionalInfo()">Subscribe</ons-toolbar-button>
+          </div>
+		    </ons-toolbar>
+		  
+		    <p style="text-align: center;">
+		      Welcome to 4U Short Stories! For Now, you are not logged in..
+		    </p>
+		    <ons-carousel class="carousel" swipeable='force' auto-scroll id="carousel">
+		      <ons-carousel-item>
+		        <img src="assets/img/onsenui-roadmap.jpg" />
+		      </ons-carousel-item>
+		      <ons-carousel-item>
+		        <img src="assets/img/Monaca_Logo.jpg" />
+		      </ons-carousel-item>
+		      <ons-carousel-item>
+		        <img src="assets/img/Onsen_UI_Logo.jpg" />
+		      </ons-carousel-item>
+		    </ons-carousel>
+		    <div class="cover-label center">
+		      <ul>
+		        <li><div id="dot0" class="circle circle_current">&#x25cf;</div></li>
+		        <li><div id="dot1" class="circle">&#x25cf;</div></li>
+		        <li><div id="dot2" class="circle">&#x25cf;</div></li>
+		      </ul>
+		    </div>
+
+		    <ons-list style="margin-top: 20px">
+		      <ons-list-header>Stories</ons-list-header>
+		      
+		      <ons-list-item id="on_fire_stories" modifier="chevron" tappable>
+		        <div class="left">
+		          <ons-icon icon="md-fire" class="list-item__icon"></ons-icon>
+		        </div>
+		        <div class="center">
+		          On Fire Stories
+		        </div>
+		      </ons-list-item>
+		      
+		      <ons-list-item id="all_stories" modifier="chevron" tappable>
+		        <div class="left">
+		          <ons-icon icon="md-book" class="list-item__icon"></ons-icon>
+		        </div>
+		        <div class="center">
+		          All Stories
+		        </div>
+		      </ons-list-item>
+		    </ons-list>
+
+		    <style type="text/css">
+		      .carousel ons-carousel-item img {
+		        width: 100%;
+		        max-height: 190px
+		      }
+
+		      .cover-label {
+		        text-align: center;
+		        cursor: default;
+		      }
+
+		      ul {
+		        list-style: none;
+		        padding: 0;
+		      }
+
+		      ul li {
+		        display: inline;
+		        margin-right: 5px;
+		      }
+
+		      .circle {
+		        font-size: 15px;
+		        display: table-cell;
+		        color: #999;
+		      + }
+
+		      .circle_current {
+		        color: white;
+		      }
+
+		      .movie_list {
+		        margin: 10px;
+		        height: 130px;
+		        padding-top: 30px;
+		      }
+
+		      .movie_list img {
+		        width: 90%
+		      }
+		    </style>
+		  </ons-page>
+		</template>
 
 		<template id="login.html">
 		  <ons-page id="login">
 		    <ons-toolbar>
-		      <div class="center" style="color: black">LOGIN PAGE</div>
+          <!--<div class="left">
+		        <ons-toolbar-button onClick='noMenuReturn()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button>
+		      </div>-->
+          <div class="center" style="color: black">LOGIN PAGE</div>
 		      <!--<div class="right">
 		        <ons-if platform="android">
 		          <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
@@ -31,18 +246,18 @@
 
 		    <div style="text-align: center; margin-top: 20px;">
 		      <p>
-		        <ons-input id="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
+		        <ons-input id="email" modifier="underbar" class="bordered-input" type="email" placeholder="Email" float></ons-input>
 		      </p>
 		      <p>
-		        <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+		        <ons-input id="password" modifier="underbar" class="bordered-input" type="password" placeholder="Password" float></ons-input>
 		      </p>
 		      <p style="margin-top: 30px;">
-		        <ons-button onclick="openAdditionalInfo()">Login</ons-button>
+		        <ons-button onclick="openInitial()" class="button-black">Login</ons-button>
 		      </p>
 		    </div>
 		    
 		    <div style="text-align: center; margin-top: 10px;">
-		      <ons-button id="sign-in-button" class="user_cover" onClick="go2Register()">
+		      <ons-button id="sign-in-button" class="button-black user_cover" onClick="go2Register()">
 		        <div class="user_thumbnail"><ons-icon icon="fa-plus-circle"></ons-icon></div>
 		        <div class="username" id="signin">Sign In</div>
 		      </ons-button>
@@ -53,6 +268,15 @@
 		        padding: 0px 20px;
 		        margin: 0px 0px;
 		      }
+
+          .button-black {
+            background-color: black;
+            color: white;
+            float: left;
+            width: 50%;
+            padding: 0px 5px;
+            box-sizing:border-box;
+          }
 
 		      .username {
 		        text-align: center;
@@ -76,6 +300,13 @@
 		        color: white;
 		        vertical-align: middle;
 		      }
+          
+          .bordered-input {
+            padding: 5px;
+            border: 1px black solid;
+            border-radius: 5px;
+            background-color: white;
+          }
 		    </style>
 		  </ons-page>
 		</template>
@@ -93,9 +324,6 @@
 		      <div style="text-align: center; margin-top: 20px;">
 		        <p>
 		          <ons-input id="email" modifier="underbar" type="email" placeholder="Email" string></ons-input>
-		        </p>
-		        <p>
-		          <ons-input id="repeated-email" modifier="underbar" type="email" placeholder="Repeat Your Email" string></ons-input>
 		        </p>
 		        <p>
 		          <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
@@ -209,7 +437,16 @@
 
     <template id="additional-information.html">
       <ons-page id="additional-information">
-        <ons-toolbar>
+        <ons-tabbar id="additional-information_tab" hide-tabs>
+
+          <ons-tab page="additional-information_etap1.html"  active> </ons-tab>
+          <ons-tab page="additional-information_etap2.html" > </ons-tab>
+          <ons-tab page="additional-information_etap3.html" > </ons-tab>
+          <ons-tab page="additional-information_etap4.html" > </ons-tab>
+
+        </ons-tabbar>
+
+        <!--<ons-toolbar>
           <div class="left">
 		        <ons-toolbar-button onClick='noMenuReturn()'><ons-icon icon="md-chevron-left"></ons-icon></ons-toolbar-button>
           </div>
@@ -250,8 +487,325 @@
               <ons-input id="birth-date" type="date"></ons-input>
             </p>
           </div>
-        </div>
+        </div>-->
       </ons-page>
+    </template>
+
+    <template id="additional-information_etap1.html">
+      <ons-page id="etap1">
+
+            <ons-toolbar class="planoFundoMenu">
+              <div class="left">
+                <ons-toolbar-button >
+                <a href="#" class="fontColorGreen" onclick="home();">&larr;</a>
+                </ons-toolbar-button>
+              </div>
+              <div class="center txtMenu" >
+              <a href="#" style="text-decoration: none; color: black;" onclick="home();">Conto G</a>
+              </div>
+            </ons-toolbar>
+
+            <div class="containerTop2">
+              <br><br>
+                <p class="txtTitleCapa">Você selecionou o perfil de aluno, para continuar preencha as informações para finalizar o cadastro!</p>
+              </div>
+              <div class="scapeOne2">
+                  <div style="height: 200px; padding: 1px 0 0 0;">
+                      <div class="scapeTwo">
+                         <div class="avatarScape"><img src="../img/avatar_1.png" height="80px" width="75px"></div>
+                          <div class="scapeTextAvatar">
+                            <h2 style="font-weight: bolder">Vamos começar?</h2>
+                            <p>Por favor, preencha seu nome completo no campo abaixo:</p>
+                          </div>
+                      </div>
+                      <div class="scapeThree">
+                        <div style="margin-left: 10%; margin-right: 10%; ">
+                          <input class="inputTextNew" type="text" placeholder="Nome" id="nome" value="">
+
+                          <ons-select id="sexoEsc" class="generoCad1">
+
+                            <option value="f">Feminino</option>
+                            <option value="m">Masculino </option>
+
+                          </ons-select>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                      <br><br>
+                      <div class="scapeFour"></div>
+
+                      <div class="scapeFourContainer">
+                          <div class="scapeFourText"><a class="button--quiet fontColorGreen2" href="#" onClick="goEtap();" > <u>PRÓXIMO</u></a></div>
+                          <div><i class="material-icons  arrowTop" > &rarr;	</i></div>
+                      </div>
+                      <br><br>
+                      <div class="footerScape" >
+                          <p class="txtConainer">Desenvolvido por Sportoy@</p>
+                      </div>
+                  </div>
+
+                </div>
+</ons-page>
+    </template>
+
+    <template id="additional-information_etap2.html">
+      <ons-page id="etap2">
+  <ons-toolbar class="planoFundoMenu">
+                <div class="left">
+                  <ons-toolbar-button >
+                  <a href="#" class="fontColorGreen" onclick="backEtap();">&larr;</a>
+                  </ons-toolbar-button>
+                </div>
+                <div class="center txtMenu" >
+                <a href="../indexAlunoLogin.html" style="text-decoration: none; color: black;">Conto G</a>
+                </div>
+              </ons-toolbar>
+
+              <div class="containerTop2">
+                <br><br>
+                  <p class="txtTitleCapa">Você selecionou o perfil de aluno, para continuar preencha as informações para finalizar o cadastro!</p>
+                </div>
+                <div class="scapeOne2">
+                    <div style="height: 200px; padding: 1px 0 0 0;">
+                        <div class="scapeTwo">
+                           <div class="avatarScape"><img src="../img/avatar_1.png" height="80px" width="75px"></div>
+                            <div class="scapeTextAvatar" >
+                              <p style="font-weight: bolder;">Agora coloque seu CPF</p>
+                              <p style="margin-top: -10px;">Se você quer saber mais sobre porque estamos pedindo essa informação, <span style="font-weight: bolder" onclick="showTemplateDialog()">clique aqui!</span></p>
+
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="scapeThree" >
+                          <p>
+                            <label for="birth-date">Birth Date</label>
+                            <ons-input id="birth-date" type="date"></ons-input>
+                          </p>
+
+                          <ons-select id="astralSign" class="generoCad1">
+
+                            <option value="capricorn">Capricórnio</option>
+                            <option value="sargitary">Sargitário</option>
+                            <option value="scorpion">Escorpião</option>
+
+
+                          </ons-select>
+
+                          <ons-select id="language" class="generoCad1">
+
+                            <option value="pt-br">Português</option>
+                            <option value="en-us">Inglês</option>
+                            <option value="spa">Espanhol</option>
+
+
+                          </ons-select>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="scapeFour"></div>
+                        <div class="scapeFour" style="margin-left: 3px"></div>
+                        <div class="scapeFourContainer">
+                            <div class="scapeFourText"><a class="button--quiet fontColorGreen2" href="#" onclick="goEtap2();" ><u>PRÓXIMO</u></a></div>
+                            <div><i class="material-icons  arrowTop" >&rarr;</i></div>
+                        </div>
+                        <div class="footerScape" >
+                            <p class="txtConainer">Desenvolvido por Sportoy@</p>
+                        </div>
+                    </div>
+
+
+                    <template id="dialog.html">
+                  <ons-dialog id="my-dialog">
+                    <div style="text-align: center; padding: 10px;">
+                      <p>
+                      Solicitamos o número do CPF para preservar a sua segurança e dos professores cadastrados no aplicativo;
+                      </p>
+
+                      <p>
+                        <ons-button onclick="hideDialog('my-dialog')">Close</ons-button>
+                      </p>
+                    </div>
+                  </ons-dialog>
+                </template>
+
+                  </div>
+
+                  <script type="text/javascript">
+                  var showTemplateDialog = function() {
+    var dialog = document.getElementById('my-dialog');
+
+    if (dialog) {
+      dialog.show();
+    } else {
+      ons.createElement('dialog.html', { append: true })
+        .then(function(dialog) {
+          dialog.show();
+        });
+    }
+  };
+
+  var hideDialog = function(id) {
+    document
+      .getElementById(id)
+      .hide();
+  };
+
+                  </script>
+</ons-page>
+    </template>
+
+    <template id="additional-information_etap3.html">
+      <ons-page id="etap3">
+  <ons-toolbar class="planoFundoMenu">
+                <div class="left">
+                  <ons-toolbar-button >
+                  <a href="#" class="fontColorGreen" onclick="backEtap2();">&larr;</a>
+                  </ons-toolbar-button>
+                </div>
+                <div class="center txtMenu" >
+                <a href="../indexAlunoLogin.html" style="text-decoration: none; color: black;">Fitimovi</a>
+                </div>
+              </ons-toolbar>
+
+              <div class="containerTop2">
+                <br><br>
+                  <p class="txtTitleCapa">Você selecionou o perfil de aluno, para continuar preencha as informações para finalizar o cadastro!</p>
+                </div>
+                <div class="scapeOne2">
+                    <div style="height: 200px; padding: 1px 0 0 0;">
+                        <div class="scapeTwo">
+                           <div class="avatarScape"><img src="../img/avatar_1.png" height="80px" width="75px"></div>
+                            <div class="scapeTextAvatar" >
+                              <p style="font-weight: bolder;">Falta pouco!</p>
+                              <p style="margin-top: -12px; font-size: 13.5px;"> Estar em contato com você é muito importante para nós! Coloque seu celular e e-mail para prosseguir seu cadastro!</p>
+
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="scapeThree" style="margin-bottom: 60px; " >
+                            <div style="margin-left: 10%; margin-right: 10%; margin-top: -60px">
+                                <input class="inputTextNew" id="fone" type="number" placeholder="Celular (somente números) " value="">
+                              </div>
+                          <div style="margin-left: 10%; margin-right: 10%; ">
+                            <input class="inputTextNew" id="email" type="text" placeholder="E-mail " value="">
+                          </div>
+                        </div>
+                        <br><br>
+                        <div class="scapeFour"></div>
+                        <div class="scapeFour" style="margin-left: 3px"></div>
+                        <div class="scapeFour" style="margin-left: 3px"></div>
+                        <div class="scapeFourContainer">
+                            <div class="scapeFourText"><a class="button--quiet fontColorGreen2" href="#" onclick="goEtap3();" ><u>PRÓXIMO</u></a></div>
+                            <div><i class="material-icons  arrowTop" >&rarr;</i></div>
+                        </div>
+                        <br><br>
+                        <div class="footerScape" >
+                            <p class="txtConainer">Desenvolvido por Sportoy@</p>
+                        </div>
+                    </div>
+
+                  </div>
+
+
+
+</ons-page>
+    </template>
+
+    <template id="additional-information_etap4.html">
+<ons-page id="etap4">
+  <ons-toolbar class="planoFundoMenu">
+            <div class="left">
+              <ons-toolbar-button >
+              <a href="#" class="fontColorGreen" onclick="backEtap3();">&larr;</a>
+              </ons-toolbar-button>
+            </div>
+            <div class="center txtMenu" >
+            <a href="../indexAlunoLogin.html" style="text-decoration: none; color: black;">Fitimovi</a>
+            </div>
+          </ons-toolbar>
+
+          <div class="containerTop">
+              <button class="fab" id="btnImagePhoto"><img src="../img/photo-camera.png" /></button>
+
+              <p class="txtTitleCapa">
+                      Seus documentos foram registrados com sucesso! Agora você precisa definir sua senha e pronto.
+                      <center> <label for="" style="color:gold; font-size:16px; font-weight: bolder;">Bem-vindo ao Fitimovi</label> </center>
+              </div>
+            <div class="scapeOne">
+                <div style="height: 200px; padding: 1px 0 0 0;">
+                    <div class="scapeTwo">
+                       <div class="avatarScape"><img src="../img/avatar_1.png" height="80px" width="75px"></div>
+                        <div class="scapeTextAvatar" >
+                          <p style="font-weight: bolder;">Defina uma senha!</p>
+                          <p style="margin-top: -12px; font-size: 13.5px;"> Escolha uma senha de acesso para a nossa plataforma :)</p>
+
+                        </div>
+                    </div>
+                    <div class="scapeThree" style="margin-bottom: 35px; " >
+                        <div style="margin-left: 10%; margin-right: 10%; margin-top: -60px">
+                            <input class="inputTextNew" type="text" placeholder="Senha" id="senha" value="">
+                          </div>
+                      <div style="margin-left: 10%; margin-right: 10%; ">
+                        <input class="inputTextNew" type="text" placeholder="Repetir a senha" id="senha2" value="">
+                      </div>
+                    </div>
+                    <div class="finalizarCadastro">
+                            <div class="scapeFourText"><a class="button--quiet fontColorGreen2" href="#" onclick="callCadastra();" ><u>FINALIZAR MEU CADASTRO</u></a></div>
+                            <div><i class="material-icons  arrowTop" >&rarr;</i></div>
+                        </div>
+                    <div class="finalizarCadastro1">
+                      </div>
+
+                    <div class="footerScape" >
+                        <p class="txtConainer">Desenvolvido por Sportoy@</p>
+                    </div>
+                </div>
+
+              </div>
+
+              <template id="dialog2.html">
+                         <ons-dialog id="my-dialog2">
+                           <div style="text-align: center; padding: 10px;">
+                             <p>
+                               Aguarde em quanto processamos seus dados!
+                             </p>
+                             <br />
+                           <div class="progress-bar progress-bar--indeterminate greenOficial">
+                           </div>
+                             <p>
+                               <ons-button onclick="hideDialog('my-dialog2')">Close</ons-button>
+                             </p>
+                           </div>
+                         </ons-dialog>
+                       </template>
+
+
+<script type="text/javascript">
+  var showTemplateDialog2 = function() {
+   var dialog = document.getElementById('my-dialog2');
+
+   if (dialog) {
+     dialog.show();
+   } else {
+     ons.createElement('dialog2.html', { append: true })
+       .then(function(dialog) {
+         dialog.show();
+       });
+   }
+  };
+
+  var hideDialog = function(id) {
+   document
+     .getElementById(id)
+     .hide();
+
+     window.location.href = "login.html";
+  };
+</script>
+
+
+</ons-page>
     </template>
 
 		<template id="home.html">
@@ -625,6 +1179,11 @@
 		  }
 		</style>
 
+    <script>
+      window.site='contog';
+    </script>
+    <script src="https://www.lgpdvault.com/app/lgpd_loader.js"></script>
+
 		<script>
 			window.fn = {};
 
@@ -633,9 +1192,38 @@
 			  menu.open();
 			};
 
+      ons.ready(function()
+        {
+            window.fiti={};
+            window.fiti.cadastroData = {
+              "nome":"",
+              "sobrenome":"",
+              "sexoEsc":"",
+              "birthDate":"",
+              "astralSign":"",
+              "language":"",
+              "fone":"",
+              "email":"",
+              "senha":""
+            };
+
+      });
+
+      window.fn.initMenuOpen = function () {
+        var menu = document.getElementById('init-menu');
+			  menu.open();
+      }
+
 			window.fn.load = function(page) {
 			  var content = document.getElementById('content');
 			  var menu = document.getElementById('menu');
+			  content.load(page)
+			    .then(menu.close.bind(menu));
+			};
+
+      window.fn.initialLoad = function(page) {
+			  var content = document.getElementById('init-content');
+			  var menu = document.getElementById('init-menu');
 			  content.load(page)
 			    .then(menu.close.bind(menu));
 			};
@@ -650,7 +1238,24 @@
 			document.addEventListener('init', function(event) {
 			  var page = event.target;
 
-			  if (page.id === 'Tab1') {
+        if (page.id === 'splash') {
+          page.querySelector('#progress-bar-splash').innerHTML = "<ons-progress-bar value=\"0\" secondary-value=\"20\"></ons-progress-bar>";
+          setTimeout(function () {
+            page.querySelector('#progress-bar-splash').innerHTML = "<ons-progress-bar value=\"20\" secondary-value=\"40\"></ons-progress-bar>";
+          }, 1000);
+
+          setTimeout(function () {
+            page.querySelector('#progress-bar-splash').innerHTML = "<ons-progress-bar value=\"40\" secondary-value=\"70\"></ons-progress-bar>";
+          }, 1000);
+
+          setTimeout(function () {
+            page.querySelector('#progress-bar-splash').innerHTML = "<ons-progress-bar value=\"70\" secondary-value=\"100\"></ons-progress-bar>";
+          }, 1000);
+
+          setTimeout(function () {
+            openLogin();
+          }, 2000);
+        } else if (page.id === 'Tab1') {
 			    /*page.querySelector('#carousel').addEventListener("postchange", function() {
 			      page.querySelector('#dot0').classList.remove("circle_current");
 			      page.querySelector('#dot1').classList.remove("circle_current");
@@ -736,13 +1341,13 @@
 			                                        '</ons-carousel-item>';
 			    }
 			  } else if (page.id === 'additional-information') {
-          page.querySelector('#next-info-button').onclick = function () {
+          /*page.querySelector('#next-info-button').onclick = function () {
             if (document.querySelector('#info-state').innerHTML === 'Stage 01') {
               document.querySelector('#info-state').innerHTML = "Stage 02";
             } else if (document.querySelector('#info-state').innerHTML === 'Stage 02') {
               openHome();
             }
-          };
+          };*/
         }
 			});
 
@@ -757,6 +1362,10 @@
 			function openHome() {
 			  document.querySelector('#myNavigator').pushPage('home_splitter.html');
 			}
+
+      function openInitial () {
+        document.querySelector('#myNavigator').pushPage('initial-page.html');
+      }
 
       function openAdditionalInfo () {
         document.querySelector('#myNavigator').pushPage('additional-information.html');
@@ -780,6 +1389,10 @@
 			  noMenuReturn();
 			}
 
+      function openLogin() {
+        document.querySelector('#myNavigator').pushPage('login.html');
+      }
+
       function openSearchBar () {
         document.querySelector('#')
       }
@@ -788,6 +1401,61 @@
 			  var story_title = document.getElementById('story_title').innerHTML;
 			  document.querySelector('#myNavigator').pushPage('story_reader.html', {data: {title: story_title}});
 			}
+
+      function home(){
+        document.querySelector('#myNavigator').popPage();
+      }
+
+      // voltar as Telas
+      function backEtap(){
+        document.getElementById('additional-information_tab').setActiveTab(0);
+      }
+      function backEtap2(){
+        document.getElementById('additional-information_tab').setActiveTab(1);
+      }
+      function backEtap3(){
+        document.getElementById('additional-information_tab').setActiveTab(2);
+      }
+    //
+
+    // Proxima Telas
+    function goEtap() {
+
+      fiti.cadastroData.nome = document.getElementById('nome').value;
+      fiti.cadastroData.sexoEsc = document.getElementById('sexoEsc').value;
+      document.getElementById('additional-information_tab').setActiveTab(1);
+    }
+    function goEtap2() {
+      fiti.cadastroData.birthDate = document.getElementById('birth-date').value;
+      fiti.cadastroData.language = document.getElementById('language').value;
+      fiti.cadastroData.astralSign = document.getElementById('astralSign').value;
+      document.getElementById('additional-information_tab').setActiveTab(2);
+    }
+    function goEtap3() {
+      fiti.cadastroData.fone = document.getElementById('fone').value;
+      fiti.cadastroData.email = document.getElementById('email').value;
+      document.getElementById('additional-information_tab').setActiveTab(3);
+    }
+
+    function callCadastra() {
+      fiti.cadastroData.senha = document.getElementById('senha').value;
+      // Monta um objeto com os valores
+      var toSend={
+        "service":"1",
+        "tbl":"user_base",
+        "user_base_name":fiti.cadastroData.nome ,
+        "user_base_sexoEsc":fiti.cadastroData.sexoEsc,
+        "user_base_birth_date":fiti.cadastroData.birthDate,
+        "user_base_astral_sign":fiti.cadastroData.astralSign,
+        "user_base_language":fiti.cadastroData.language,
+        "user_base_fone":fiti.cadastroData.fone,
+        "user_base_email":fiti.cadastroData.email,
+        "user_base_senha":fiti.cadastroData.senha,
+      }
+
+      console.log(toSend);
+      openHome();
+    }
 		</script>
 	</body>
 
